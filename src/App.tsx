@@ -31,7 +31,7 @@ function App() {
                 </a>
               </td>
               <td>{targetData.target.approvedName}</td>
-              <td>{targetData.score}</td>
+              <td>{targetData.score.toFixed(5)}</td>
             </tr>
           ))}
         </tbody>
