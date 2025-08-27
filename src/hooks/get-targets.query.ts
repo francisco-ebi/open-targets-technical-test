@@ -17,6 +17,10 @@ export const getTargetsQuery = () => {
   return {
     loading,
     error,
-    targets: data?.disease?.associatedTargets?.rows ?? [],
+    targets: !!data
+      ? data.disease.associatedTargets.rows.toSorted(
+          (a, b) => b.score - a.score
+        )
+      : [],
   };
 };
