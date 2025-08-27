@@ -25,7 +25,7 @@ function App() {
                 <a
                   target="_blank"
                   rel="noopener"
-                  href={`https://platform.opentargets.org/target/${targetData.target.approvedName}`}
+                  href={`https://platform.opentargets.org/target/${targetData.target.id}`}
                 >
                   {targetData.target.approvedSymbol}
                 </a>
