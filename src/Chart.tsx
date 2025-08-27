@@ -22,12 +22,22 @@ const getBarColor = (bar: any) => colorMap[bar.indexValue];
 
 const getRadarColor = (bar: any) => colorMap[bar.index];
 
+const formatAxisLabel = (label: string) => {
+  return label
+    .split("_")
+    .map((subs) => {
+      if (subs === "rna") {
+        return "RNA";
+      }
+      return `${subs[0].toUpperCase()}${subs.slice(1)}`;
+    })
+    .join(" ");
+};
 export const Chart = ({ type, selectedTarget: target }: ChartProps) => {
   const chartData = useMemo(() => {
     return target.datatypeScores;
   }, [target]);
 
-  console.log({ chartData });
   if (type === "bar") {
     return (
       <ResponsiveBar
@@ -35,7 +45,11 @@ export const Chart = ({ type, selectedTarget: target }: ChartProps) => {
         indexBy="id"
         keys={["score"]}
         colors={getBarColor}
-        axisBottom={{ legend: "Data type", legendOffset: 32 }}
+        axisBottom={{
+          legend: "Data type",
+          legendOffset: 32,
+          format: formatAxisLabel,
+        }}
         axisLeft={{ legend: "Score", legendOffset: -40 }}
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         labelSkipWidth={12}
