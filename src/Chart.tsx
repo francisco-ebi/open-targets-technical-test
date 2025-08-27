@@ -1,5 +1,6 @@
 import type { Target } from "@/models";
 import { ResponsiveBar } from "@nivo/bar";
+import { ResponsivePolarBar } from "@nivo/polar-bar";
 import { useMemo } from "react";
 
 type ChartProps = {
@@ -7,12 +8,24 @@ type ChartProps = {
   selectedTarget: Target;
 };
 
+const colorMap = {
+  literature: "#E69F00",
+  rna_expression: "#56B4E9",
+  genetic_association: "#009E73",
+  somatic_mutation: "#F0E442",
+  known_drug: "#0072B2",
+  animal_model: "#D55E00",
+  affected_pathway: "#CC79A7",
+};
+
+const getBarColor = (bar: any) => colorMap[bar.indexValue];
+
+const getRadarColor = (bar: any) => colorMap[bar.index];
+
 export const Chart = ({ type, selectedTarget: target }: ChartProps) => {
   const chartData = useMemo(() => {
-    if (type === "bar") {
-      return target.datatypeScores;
-    }
-  }, [type, target]);
+    return target.datatypeScores;
+  }, [target]);
 
   console.log({ chartData });
   if (type === "bar") {
@@ -21,10 +34,36 @@ export const Chart = ({ type, selectedTarget: target }: ChartProps) => {
         data={chartData}
         indexBy="id"
         keys={["score"]}
-        defaultHeight={500}
+        colors={getBarColor}
         axisBottom={{ legend: "Data type", legendOffset: 32 }}
         axisLeft={{ legend: "Score", legendOffset: -40 }}
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+        labelSkipWidth={12}
+        labelSkipHeight={12}
+      />
+    );
+  }
+  if (type === "radar") {
+    return (
+      <ResponsivePolarBar
+        data={chartData}
+        indexBy="id"
+        keys={["score"]}
+        colors={getRadarColor}
+        valueSteps={5}
+        margin={{ top: 30, right: 20, bottom: 70, left: 20 }}
+        innerRadius={0.25}
+        cornerRadius={2}
+        borderWidth={1}
+        arcLabelsSkipRadius={28}
+        radialAxis={{
+          angle: 180,
+          ticksPosition: "after",
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+        }}
+        circularAxisOuter={{ tickSize: 5, tickPadding: 15, tickRotation: 0 }}
       />
     );
   }
