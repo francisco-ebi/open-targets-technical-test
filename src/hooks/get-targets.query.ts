@@ -18,9 +18,9 @@ export const getTargetsQuery = () => {
     loading,
     error,
     targets: !!data
-      ? data.disease.associatedTargets.rows.toSorted(
-          (a, b) => b.score - a.score
-        )
+      ? data.disease.associatedTargets.rows
+          .toSorted((a, b) => b.score - a.score)
+          .slice(0, 10)
       : [],
   };
 };
