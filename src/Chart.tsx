@@ -68,7 +68,7 @@ export const Chart = ({ type, selectedTarget: target }: ChartProps) => {
   const chartData = useMemo(() => {
     return target.datatypeScores.map((score) => ({
       ...score,
-      score: score.score.toFixed(5),
+      score: score.score.toFixed(3),
     }));
   }, [target]);
 

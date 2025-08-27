@@ -20,6 +20,7 @@ function App() {
       <table className="striped">
         <thead>
           <tr>
+            <th></th>
             <th>Approved Symbol</th>
             <th>Gene Name</th>
             <th>Overall Association Score</th>
@@ -30,6 +31,7 @@ function App() {
             targets.length === 0 &&
             [...Array(10)].map(() => (
               <tr>
+                <td></td>
                 <td>
                   <Skeleton />
                 </td>
@@ -44,14 +46,7 @@ function App() {
           {targets.map((targetData) => (
             <>
               <tr key={targetData.target.id}>
-                <td className="selection-cell">
-                  <a
-                    target="_blank"
-                    rel="noopener"
-                    href={`https://platform.opentargets.org/target/${targetData.target.id}`}
-                  >
-                    {targetData.target.approvedSymbol}
-                  </a>
+                <td>
                   <button
                     className="outline open-row-button"
                     onClick={() => setSelectedTarget(targetData)}
@@ -60,12 +55,21 @@ function App() {
                     +
                   </button>
                 </td>
+                <td>
+                  <a
+                    target="_blank"
+                    rel="noopener"
+                    href={`https://platform.opentargets.org/target/${targetData.target.id}`}
+                  >
+                    {targetData.target.approvedSymbol}
+                  </a>
+                </td>
                 <td>{targetData.target.approvedName}</td>
-                <td>{targetData.score.toFixed(5)}</td>
+                <td>{targetData.score.toFixed(3)}</td>
               </tr>
               {targetData.target.id === selectedTarget?.target.id && (
                 <tr>
-                  <td colSpan={3} style={{ textAlign: "center" }}>
+                  <td colSpan={4} style={{ textAlign: "center" }}>
                     <div className="tabs" role="group">
                       <button
                         className={cx({ outline: selectedChart !== "bar" })}
