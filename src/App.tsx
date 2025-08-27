@@ -49,7 +49,7 @@ function App() {
               </tr>
               {targetData.target.id === selectedTarget?.target.id && (
                 <tr>
-                  <td colSpan={3}>
+                  <td colSpan={3} style={{ textAlign: "center" }}>
                     <div className="tabs" role="group">
                       <button
                         className={cx({ outline: selectedChart !== "bar" })}
@@ -64,6 +64,10 @@ function App() {
                         Radar chart
                       </button>
                     </div>
+                    <h4>
+                      Data Type Scores: {selectedTarget.target.approvedSymbol}{" "}
+                      and lung carcinoma
+                    </h4>
                     <div className="chart-container">
                       <Chart
                         type={selectedChart}
