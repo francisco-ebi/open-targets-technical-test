@@ -12,8 +12,9 @@ Libraries used:
 ## How to run
 
 You will need Node.js and Yarn already installed.
+
 After you clone this repository, navigate to the folder and run:
-`yarn install`
+`yarn install`.
 to install all dependencies.
 After that, you need to run:
 `yarn dev`
