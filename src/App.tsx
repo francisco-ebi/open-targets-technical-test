@@ -8,7 +8,7 @@ import "./App.css";
 function App() {
   const { loading, error, targets } = getTargetsQuery();
   const [selectedTarget, setSelectedTarget] = useState<Target | null>(null);
-  const [selectedChart, setSelectedChart] = useState<"bar" | "radar">("bar");
+  const [selectedChart, setSelectedChart] = useState<"bar" | "polar">("bar");
   console.log({ loading, error, targets });
 
   return (
@@ -58,10 +58,10 @@ function App() {
                         Bar chart
                       </button>
                       <button
-                        className={cx({ outline: selectedChart !== "radar" })}
-                        onClick={() => setSelectedChart("radar")}
+                        className={cx({ outline: selectedChart !== "polar" })}
+                        onClick={() => setSelectedChart("polar")}
                       >
-                        Radar chart
+                        Polar chart
                       </button>
                     </div>
                     <h4>

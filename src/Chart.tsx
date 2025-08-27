@@ -4,7 +4,7 @@ import { ResponsivePolarBar } from "@nivo/polar-bar";
 import { useMemo } from "react";
 
 type ChartProps = {
-  type: "bar" | "radar";
+  type: "bar" | "polar";
   selectedTarget: Target;
 };
 
@@ -43,7 +43,7 @@ export const Chart = ({ type, selectedTarget: target }: ChartProps) => {
       />
     );
   }
-  if (type === "radar") {
+  if (type === "polar") {
     return (
       <ResponsivePolarBar
         data={chartData}
