@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { getTargetsQuery } from "@/hooks/get-targets.query";
 import type { Target } from "@/models";
+import cx from "classnames";
 import "./App.css";
 
 function App() {
   const { loading, error, targets } = getTargetsQuery();
   const [selectedTarget, setSelectedTarget] = useState<Target | null>(null);
+  const [selectedChart, setSelectedChart] = useState<"bar" | "radar">("bar");
   console.log({ loading, error, targets });
 
   return (
@@ -48,8 +50,18 @@ function App() {
                 <tr>
                   <td colSpan={3}>
                     <div className="tabs" role="group">
-                      <button className="outline">Bar chart</button>
-                      <button className="outline">Radar chart</button>
+                      <button
+                        className={cx({ outline: selectedChart !== "bar" })}
+                        onClick={() => setSelectedChart("bar")}
+                      >
+                        Bar chart
+                      </button>
+                      <button
+                        className={cx({ outline: selectedChart !== "radar" })}
+                        onClick={() => setSelectedChart("radar")}
+                      >
+                        Radar chart
+                      </button>
                     </div>
                   </td>
                 </tr>
