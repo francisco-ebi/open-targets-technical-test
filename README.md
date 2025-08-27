@@ -3,10 +3,11 @@
 Made with Vite as build tool and Yarn to manage dependencies.
 
 Libraries used:
-React
-Picocss as a minimal css framework
-ApolloClient for GraphQL client
-Nivo as charting library
+
+- React
+- Picocss as a minimal css framework
+- ApolloClient for GraphQL client
+- Nivo as charting library
 
 ## How to run
 
