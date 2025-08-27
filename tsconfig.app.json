@@ -21,7 +21,12 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "paths": {
+      "@/graphql/*": ["./src/graphql/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/models": ["./src/models/index.ts"]
+    }
   },
   "include": ["src"]
 }
