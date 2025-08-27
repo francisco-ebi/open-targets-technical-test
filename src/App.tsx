@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getTargetsQuery } from "@/hooks/get-targets.query";
 import type { Target } from "@/models";
 import cx from "classnames";
+import { Chart } from "./Chart";
 import "./App.css";
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
                   <button
                     className="outline open-row-button"
                     onClick={() => setSelectedTarget(targetData)}
-                    aria-label={`View data charts for gene ${targetData.target.approvedSymbol}`}
+                    title={`View data charts for gene ${targetData.target.approvedSymbol}`}
                   >
                     +
                   </button>
@@ -62,6 +63,12 @@ function App() {
                       >
                         Radar chart
                       </button>
+                    </div>
+                    <div className="chart-container">
+                      <Chart
+                        type={selectedChart}
+                        selectedTarget={selectedTarget}
+                      />
                     </div>
                   </td>
                 </tr>
