@@ -21,7 +21,15 @@ function App() {
         <tbody>
           {targets.map((targetData) => (
             <tr>
-              <td>{targetData.target.approvedSymbol}</td>
+              <td>
+                <a
+                  target="_blank"
+                  rel="noopener"
+                  href={`https://platform.opentargets.org/target/${targetData.target.approvedName}`}
+                >
+                  {targetData.target.approvedSymbol}
+                </a>
+              </td>
               <td>{targetData.target.approvedName}</td>
               <td>{targetData.score}</td>
             </tr>
