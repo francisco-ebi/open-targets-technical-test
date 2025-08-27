@@ -33,9 +33,13 @@ const formatAxisLabel = (label: string) => {
     })
     .join(" ");
 };
+
 export const Chart = ({ type, selectedTarget: target }: ChartProps) => {
   const chartData = useMemo(() => {
-    return target.datatypeScores;
+    return target.datatypeScores.map((score) => ({
+      ...score,
+      score: score.score.toFixed(5),
+    }));
   }, [target]);
 
   if (type === "bar") {
