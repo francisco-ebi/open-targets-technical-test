@@ -2,6 +2,9 @@ import type { Target } from "@/models";
 import { ResponsiveBar } from "@nivo/bar";
 import { ResponsivePolarBar } from "@nivo/polar-bar";
 import { useMemo } from "react";
+import { animated } from "@react-spring/web";
+import { Text } from "@nivo/text";
+import type { CircularAxisTickProps } from "@nivo/polar-axes";
 
 type ChartProps = {
   type: "bar" | "polar";
@@ -32,6 +35,33 @@ const formatAxisLabel = (label: string) => {
       return `${subs[0].toUpperCase()}${subs.slice(1)}`;
     })
     .join(" ");
+};
+
+const CustomCircularAxisTick = ({
+  label,
+  theme,
+  animated: animatedProps,
+}: CircularAxisTickProps) => {
+  return (
+    <animated.g opacity={animatedProps.opacity}>
+      <animated.line
+        x1={animatedProps.x1}
+        y1={animatedProps.y1}
+        x2={animatedProps.x2}
+        y2={animatedProps.y2}
+        style={theme.ticks.line}
+      />
+      <Text
+        dx={animatedProps.textX}
+        dy={animatedProps.textY}
+        dominantBaseline="central"
+        style={theme.ticks.text}
+        textAnchor="middle"
+      >
+        {formatAxisLabel(label)}
+      </Text>
+    </animated.g>
+  );
 };
 
 export const Chart = ({ type, selectedTarget: target }: ChartProps) => {
@@ -74,14 +104,12 @@ export const Chart = ({ type, selectedTarget: target }: ChartProps) => {
         cornerRadius={2}
         borderWidth={1}
         arcLabelsSkipRadius={28}
-        radialAxis={{
-          angle: 180,
-          ticksPosition: "after",
+        circularAxisOuter={{
           tickSize: 5,
-          tickPadding: 5,
+          tickPadding: 15,
           tickRotation: 0,
+          tickComponent: CustomCircularAxisTick,
         }}
-        circularAxisOuter={{ tickSize: 5, tickPadding: 15, tickRotation: 0 }}
       />
     );
   }
