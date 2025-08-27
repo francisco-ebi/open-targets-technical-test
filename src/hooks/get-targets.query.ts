@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/client/react";
 import { GET_TARGETS } from "@/graphql/queries";
-import { useEffect } from "react";
 import type { Target } from "@/models";
 
 type QueryResponse = {
