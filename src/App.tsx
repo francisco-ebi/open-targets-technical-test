@@ -2,14 +2,15 @@ import { useState } from "react";
 import { getTargetsQuery } from "@/hooks/get-targets.query";
 import type { Target } from "@/models";
 import cx from "classnames";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { Chart } from "./Chart";
 import "./App.css";
 
 function App() {
-  const { loading, error, targets } = getTargetsQuery();
+  const { loading, targets } = getTargetsQuery();
   const [selectedTarget, setSelectedTarget] = useState<Target | null>(null);
   const [selectedChart, setSelectedChart] = useState<"bar" | "polar">("bar");
-  console.log({ loading, error, targets });
 
   return (
     <>
@@ -25,6 +26,21 @@ function App() {
           </tr>
         </thead>
         <tbody>
+          {loading &&
+            targets.length === 0 &&
+            [...Array(10)].map(() => (
+              <tr>
+                <td>
+                  <Skeleton />
+                </td>
+                <td>
+                  <Skeleton />
+                </td>
+                <td>
+                  <Skeleton />
+                </td>
+              </tr>
+            ))}
           {targets.map((targetData) => (
             <>
               <tr key={targetData.target.id}>

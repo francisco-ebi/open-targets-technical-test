@@ -104,6 +104,7 @@ export const Chart = ({ type, selectedTarget: target }: ChartProps) => {
         cornerRadius={2}
         borderWidth={1}
         arcLabelsSkipRadius={28}
+        enableArcLabels={true}
         circularAxisOuter={{
           tickSize: 5,
           tickPadding: 15,
