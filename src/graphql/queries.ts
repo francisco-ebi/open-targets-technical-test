@@ -8,6 +8,7 @@ export const GET_TARGETS = gql`
           target {
             id
             approvedSymbol
+            approvedName
           }
           score
           datatypeScores {
